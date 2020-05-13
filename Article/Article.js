@@ -126,9 +126,10 @@ const articleMaker = (title, date, firstParagraph, secondParagraph, thirdParagra
   article.appendChild(third);
   article.appendChild(bottomSpan);
 
-  article.classList.add('articles');
+  article.classList.add('article');
   datePara.classList.add('date');
   bottomSpan.classList.add('expandButton');
+
 
   header.textContent = title;
   datePara.textContent = date;
@@ -136,7 +137,7 @@ const articleMaker = (title, date, firstParagraph, secondParagraph, thirdParagra
   second.textContent = secondParagraph;
   third.textContent = thirdParagraph;
 
-  bottomSpan.addEventListener('click', ()=>{
+  bottomSpan.addEventListener('click', () => {
     article.classList.toggle('article-open')
   })
 
@@ -144,9 +145,9 @@ const articleMaker = (title, date, firstParagraph, secondParagraph, thirdParagra
 }
 
 
-const testArticle = articleMaker('test title', 'test date', 'test first', 'test second', 'test third')
+// const testArticle = articleMaker('test title', 'test date', 'test first', 'test second', 'test third')
 const articles = document.querySelector('.articles')
-articles.appendChild(testArticle)
+// articles.appendChild(testArticle)
 
 data.forEach(el => {
   articles.appendChild(articleMaker(el.title, el.date, el.firstParagraph, el.secondParagraph, el.thirdParagraph))
