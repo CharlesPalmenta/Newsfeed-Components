@@ -89,7 +89,6 @@ const data = [
 ];
 
 /* Step 1: Write a component called 'articleMaker' to create an article. You want your component to return markup like the template below: 
-
   <div class="article">
     <h2>{title of the article}</h2>
     <p class="date">{date of the article}</p>
@@ -111,3 +110,44 @@ const data = [
 
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 */
+const articleMaker = (title, date, firstParagraph, secondParagraph, thirdParagraph) => {
+  const article = document.createElement('div');
+  const header = document.createElement('h2');
+  const datePara = document.createElement('p');
+  const first = document.createElement('p');
+  const second = document.createElement('p');
+  const third = document.createElement('p');
+  const bottomSpan = document.createElement('span');
+
+  article.appendChild(header);
+  article.appendChild(datePara);
+  article.appendChild(first);
+  article.appendChild(second);
+  article.appendChild(third);
+  article.appendChild(bottomSpan);
+
+  article.classList.add('articles');
+  datePara.classList.add('date');
+  bottomSpan.classList.add('expandButton');
+
+  header.textContent = title;
+  datePara.textContent = date;
+  first.textContent = firstParagraph;
+  second.textContent = secondParagraph;
+  third.textContent = thirdParagraph;
+
+  bottomSpan.addEventListener('click', ()=>{
+    article.classList.toggle('article-open')
+  })
+
+  return article;
+}
+
+
+const testArticle = articleMaker('test title', 'test date', 'test first', 'test second', 'test third')
+const articles = document.querySelector('.articles')
+articles.appendChild(testArticle)
+
+data.forEach(el => {
+  articles.appendChild(articleMaker(el.title, el.date, el.firstParagraph, el.secondParagraph, el.thirdParagraph))
+})
