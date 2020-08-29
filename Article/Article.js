@@ -85,11 +85,17 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Some Science Sounding Stuff',
+    date: 'May 12th, 2020',
+    firstParagraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eros augue, consectetur ut magna ut, elementum feugiat eros. Quisque et nisl a leo convallis lobortis     rhoncus sed eros. Curabitur vel pharetra nibh, et laoreet quam. Sed ut finibus felis, a dapibus libero. Maecenas eget nibh a diam fermentum fermentum non laoreet ligula. Fusce libero risus, tempor in ornare vitae, sollicitudin vitae enim. Nunc interdum elit quis nulla molestie pulvinar. Proin porttitor sed neque a fringilla. Vestibulum efficitur leo non tincidunt aliquam. Maecenas sagittis tortor hendrerit justo consectetur tristique. Donec non dignissim est, ut rutrum ex. Quisque venenatis nisi justo, vitae rhoncus ante malesuada quis.',
+    secondParagraph: 'Nam ac dolor nec nunc posuere porttitor. Morbi eu auctor dolor. Etiam at ex sit amet dui rhoncus auctor et eu lacus. Aenean arcu magna, sodales ac quam eget, bibendum facilisis metus. In vitae sodales felis, eu ornare elit. Donec consequat lacus at felis viverra tristique. In lobortis gravida purus in laoreet. Proin ut felis et ex dictum consequat vitae sed eros. Suspendisse quis turpis id nisi interdum rutrum viverra nec nunc. Nam ornare, tortor quis tincidunt luctus, lacus velit dapibus nulla, sed volutpat ante lorem ac libero. Curabitur rutrum blandit consequat. Pellentesque lacus nulla, cursus eu lobortis a, placerat et lacus. Nunc non nisi condimentum, molestie metus id, viverra felis.',
+    thirdParagraph: 'Nullam tincidunt facilisis tellus at ullamcorper. Cras lectus ex, luctus at suscipit ut, cursus pretium ligula. Quisque sit amet ex mauris. Phasellus vehicula arcu dui, ut luctus nibh elementum a. Quisque malesuada dolor eu diam posuere, tristique malesuada felis vestibulum. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed hendrerit mauris ut magna viverra pharetra.'
   }
 ];
 
 /* Step 1: Write a component called 'articleMaker' to create an article. You want your component to return markup like the template below: 
-
   <div class="article">
     <h2>{title of the article}</h2>
     <p class="date">{date of the article}</p>
@@ -111,3 +117,47 @@ const data = [
 
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 */
+const articleMaker = (title, date, firstParagraph, secondParagraph, thirdParagraph) => {
+  const article = document.createElement('div');
+  const header = document.createElement('h2');
+  const datePara = document.createElement('p');
+  const first = document.createElement('p');
+  const second = document.createElement('p');
+  const third = document.createElement('p');
+  const bottomSpan = document.createElement('span');
+  const expandButton = document.createElement('button')
+
+  article.appendChild(header);
+  article.appendChild(datePara);
+  article.appendChild(first);
+  article.appendChild(second);
+  article.appendChild(third);
+  article.appendChild(bottomSpan);
+  bottomSpan.appendChild(expandButton);
+
+  article.classList.add('article');
+  datePara.classList.add('date');
+  bottomSpan.classList.add('expandButton');
+
+
+  header.textContent = title;
+  datePara.textContent = date;
+  first.textContent = firstParagraph;
+  second.textContent = secondParagraph;
+  third.textContent = thirdParagraph;
+
+  bottomSpan.addEventListener('click', () => {
+    article.classList.toggle('article-open');
+  })
+
+  return article;
+}
+
+
+// const testArticle = articleMaker('test title', 'test date', 'test first', 'test second', 'test third')
+const articles = document.querySelector('.articles')
+// articles.appendChild(testArticle)
+
+data.forEach(el => {
+  articles.appendChild(articleMaker(el.title, el.date, el.firstParagraph, el.secondParagraph, el.thirdParagraph))
+})
